@@ -4,6 +4,8 @@
 
 <h3>Full-Stack Developer · Cloud Systems Engineer</h3>
 
+<p><strong>Founder &amp; Owner of <a href="https://github.com/mayor-cloud">Mayor Cloud</a></strong></p>
+
 </div>
 
 ---
@@ -102,7 +104,7 @@
 <div align="center">
 
 <a href="https://github.com/its-3mran"><img src="https://img.shields.io/badge/GitHub-its--3mran-181717?style=for-the-badge&logo=github&logoColor=white" alt="Personal GitHub" /></a>
-<a href="https://github.com/mayor-cloud"><img src="https://img.shields.io/badge/Mayor%20Cloud-Organization-111827?style=for-the-badge&logo=github&logoColor=white" alt="Mayor Cloud organization" /></a>
+<a href="https://github.com/mayor-cloud"><img src="https://img.shields.io/badge/Mayor%20Cloud-Founder%20%26%20Owner-111827?style=for-the-badge&logo=github&logoColor=white" alt="Founder and Owner of Mayor Cloud" /></a>
 <a href="https://www.youtube.com/@mayor_cloud"><img src="https://img.shields.io/badge/YouTube-MAYOR%20CLOUD-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Mayor Cloud YouTube" /></a>
 <a href="https://discord.gg/mayor"><img src="https://img.shields.io/badge/Discord-Community-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Mayor Cloud Discord" /></a>
 
