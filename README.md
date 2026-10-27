@@ -77,7 +77,7 @@
     </td>
     <td align="center" width="50%" valign="top">
       <h3>Language Breakdown</h3>
-      <img src="https://github-stats-extended.vercel.app/api/top-langs/?username=its-3mran&layout=compact&langs_count=8&hide_border=true&bg_color=0D1117&title_color=00C853&text_color=C9D1D9" width="100%" alt="Language breakdown across public repositories" />
+      <img src="https://raw.githubusercontent.com/its-3mran/its-3mran/main/assets/language-breakdown.svg" width="100%" alt="Language breakdown across public repositories" />
     </td>
   </tr>
   <tr>
@@ -109,7 +109,7 @@
     </td>
   </tr>
   <tr>
-    <td align="center" width="50%"><h3>Repository Languages</h3><img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=its-3mran&theme=github_dark" width="100%" alt="Languages ranked by repository count" /></td>
+    <td align="center" width="50%"><h3>Repository Languages</h3><img src="https://raw.githubusercontent.com/its-3mran/its-3mran/main/assets/repository-languages.svg" width="100%" alt="Public repositories ranked by primary language" /></td>
     <td align="center" width="50%"><h3>Profile Summary</h3><img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=its-3mran&theme=github_dark" width="100%" alt="GitHub profile statistics" /></td>
   </tr>
 </table>
