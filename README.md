@@ -65,38 +65,19 @@
 ## 📊 GitHub Statistics
 
 <p align="center">
-  <a href="https://github.com/its-3mran?tab=followers"><img src="https://img.shields.io/github/followers/its-3mran?style=for-the-badge&label=Followers&logo=github&logoColor=00C853&labelColor=0D1117&color=00C853" alt="Live GitHub follower count" /></a>
-  <a href="https://github.com/its-3mran?tab=repositories"><img src="https://img.shields.io/github/stars/its-3mran?style=for-the-badge&label=Total%20Stars&logo=github&logoColor=00C853&labelColor=0D1117&color=00C853" alt="Live GitHub total stars" /></a>
+  <a href="https://github.com/its-3mran?tab=followers"><img src="https://img.shields.io/github/followers/its-3mran?style=for-the-badge&label=Followers&logo=github&logoColor=00C853&labelColor=0D1117&color=00C853" alt="GitHub followers" /></a>
+  <a href="https://github.com/its-3mran?tab=repositories"><img src="https://img.shields.io/github/stars/its-3mran?style=for-the-badge&label=Stars&logo=github&logoColor=00C853&labelColor=0D1117&color=00C853" alt="Stars on owned repositories" /></a>
 </p>
 
-<table width="100%">
-  <tr>
-    <td align="center" width="50%" valign="top">
-      <h3>Development Overview</h3>
-      <img src="https://github-stats-extended.vercel.app/api?username=its-3mran&show_icons=true&hide_border=true&bg_color=0D1117&title_color=00C853&icon_color=00C853&text_color=C9D1D9&rank_icon=github" width="100%" alt="Development overview: stars, commits, pull requests and issues" />
-    </td>
-    <td align="center" width="50%" valign="top">
-      <h3>Language Breakdown</h3>
-      <img src="https://github-stats-extended.vercel.app/api/top-langs/?username=its-3mran&layout=compact&langs_count=8&hide_border=true&bg_color=0D1117&title_color=00C853&text_color=C9D1D9" width="100%" alt="Language breakdown across public repositories" />
-    </td>
-  </tr>
-  <tr>
-    <td align="center" colspan="2">
-      <h3>Contribution Streak</h3>
-      <img src="https://streak-stats.demolab.com?user=its-3mran&hide_border=true&background=0D1117&ring=00C853&fire=00C853&currStreakLabel=00C853&sideLabels=C9D1D9&currStreakNum=FFFFFF&sideNums=FFFFFF&dates=8B949E" width="85%" alt="Total contributions, current streak and longest streak" />
-    </td>
-  </tr>
-  <tr>
-    <td align="center" colspan="2">
-      <h3>Contribution Timeline</h3>
-      <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=its-3mran&theme=github_dark" width="100%" alt="GitHub contribution timeline and activity summary" />
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="50%"><h3>Commit Languages</h3><img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=its-3mran&theme=github_dark" width="100%" alt="Languages ranked by commit activity" /></td>
-    <td align="center" width="50%"><h3>Commit Hours · UTC</h3><img src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=its-3mran&theme=github_dark&utcOffset=0" width="100%" alt="Commit activity by hour in UTC" /></td>
-  </tr>
-</table>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/its-3mran/its-3mran/main/assets/github-stats.svg" width="100%" alt="GitHub statistics: public repositories, stars, forks, followers, yearly contributions, commits, pull requests, issues, reviews and languages" />
+</p>
+
+<p align="center"><sub>Updated automatically every 6 hours using GitHub Actions. Contribution counts cover the current year; repository and language statistics cover public, non-fork repositories owned by this account.</sub></p>
+
+<p align="center">
+  <a href="https://github.com/its-3mran"><img src="https://streak-stats.demolab.com?user=its-3mran&hide_border=true&background=0D1117&ring=00C853&fire=00C853&currStreakLabel=00C853&sideLabels=C9D1D9&currStreakNum=FFFFFF&sideNums=FFFFFF&dates=8B949E" width="85%" alt="Contribution streak" /></a>
+</p>
 
 ---
 
