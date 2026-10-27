@@ -73,7 +73,7 @@
   <tr>
     <td align="center" width="50%" valign="top">
       <h3>Development Overview</h3>
-      <img src="https://github-stats-extended.vercel.app/api?username=its-3mran&show_icons=true&hide_border=true&bg_color=0D1117&title_color=00C853&icon_color=00C853&text_color=C9D1D9&rank_icon=github" width="100%" alt="Development overview: stars, commits, pull requests and issues" />
+      <img src="https://github-stats-extended.vercel.app/api?username=its-3mran&show_icons=true&hide_border=true&bg_color=0D1117&title_color=00C853&icon_color=00C853&text_color=C9D1D9&rank_icon=github&card_width=400&line_height=30" width="100%" alt="Development overview: stars, commits, pull requests and issues" />
     </td>
     <td align="center" width="50%" valign="top">
       <h3>Language Breakdown</h3>
