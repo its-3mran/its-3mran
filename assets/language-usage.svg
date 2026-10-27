@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="360" viewBox="0 0 800 360" role="img" aria-label="Programming language usage">
+<rect width="800" height="360" rx="18" fill="#0d1117"/>
+<text x="28" y="40" fill="#00c853" font-family="Arial,sans-serif" font-size="22" font-weight="bold">Language Usage · Public Repositories</text>
+<text x="28" y="91" fill="#c9d1d9" font-family="Arial,sans-serif" font-size="14">JavaScript</text>
+<rect x="180" y="78" width="480" height="16" rx="8" fill="#21262d"/>
+<rect x="180" y="78" width="272.8" height="16" rx="8" fill="#00c853"/>
+<text x="680" y="91" fill="#fff" font-family="Arial,sans-serif" font-size="14">56.8%</text>
+<text x="28" y="133" fill="#c9d1d9" font-family="Arial,sans-serif" font-size="14">CSS</text>
+<rect x="180" y="120" width="480" height="16" rx="8" fill="#21262d"/>
+<rect x="180" y="120" width="118.1" height="16" rx="8" fill="#58a6ff"/>
+<text x="680" y="133" fill="#fff" font-family="Arial,sans-serif" font-size="14">24.6%</text>
+<text x="28" y="175" fill="#c9d1d9" font-family="Arial,sans-serif" font-size="14">EJS</text>
+<rect x="180" y="162" width="480" height="16" rx="8" fill="#21262d"/>
+<rect x="180" y="162" width="67.2" height="16" rx="8" fill="#bc8cff"/>
+<text x="680" y="175" fill="#fff" font-family="Arial,sans-serif" font-size="14">14.0%</text>
+<text x="28" y="217" fill="#c9d1d9" font-family="Arial,sans-serif" font-size="14">HTML</text>
+<rect x="180" y="204" width="480" height="16" rx="8" fill="#21262d"/>
+<rect x="180" y="204" width="21.9" height="16" rx="8" fill="#f2cc60"/>
+<text x="680" y="217" fill="#fff" font-family="Arial,sans-serif" font-size="14">4.6%</text>
+<text x="28" y="340" fill="#8b949e" font-family="Arial,sans-serif" font-size="12">By code size · public, non-fork repositories · updated 2026-10-27 00:18 UTC</text>
+</svg>
