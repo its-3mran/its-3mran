@@ -99,7 +99,13 @@
   <tr>
     <td align="center" colspan="2">
       <h3>Contribution Activity · Last 31 Days</h3>
-      <img src="https://github-readme-activity-graph.vercel.app/graph?username=its-3mran&bg_color=0D1117&color=C9D1D9&line=00C853&point=FFFFFF&area=true&area_color=00C853&hide_border=true" width="100%" alt="Daily GitHub contributions over the last 31 days" />
+      <img src="https://raw.githubusercontent.com/its-3mran/its-3mran/main/assets/contribution-activity.svg" width="100%" alt="Daily GitHub contributions over the last 31 days" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2">
+      <h3>Language Usage</h3>
+      <img src="https://raw.githubusercontent.com/its-3mran/its-3mran/main/assets/language-usage.svg" width="100%" alt="Language usage percentages by code size in public repositories" />
     </td>
   </tr>
   <tr>
