@@ -103,12 +103,6 @@
     </td>
   </tr>
   <tr>
-    <td align="center" colspan="2">
-      <h3>Language Usage</h3>
-      <img src="https://raw.githubusercontent.com/its-3mran/its-3mran/main/assets/language-usage.svg" width="100%" alt="Language usage percentages by code size in public repositories" />
-    </td>
-  </tr>
-  <tr>
     <td align="center" width="50%"><h3>Repository Languages</h3><img src="https://raw.githubusercontent.com/its-3mran/its-3mran/main/assets/repository-languages.svg" width="100%" alt="Public repositories ranked by primary language" /></td>
     <td align="center" width="50%"><h3>Profile Summary</h3><img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=its-3mran&theme=github_dark" width="100%" alt="GitHub profile statistics" /></td>
   </tr>
