@@ -113,12 +113,29 @@ jobs:
               language_svg.append('<text x="28" y="85" fill="#c9d1d9" font-family="Arial,sans-serif" font-size="14">No language data yet</text>')
           language_svg += [f'<text x="28" y="340" fill="#8b949e" font-family="Arial,sans-serif" font-size="12">By code size · public, non-fork repositories · updated {updated}</text>', '</svg>']
           with open("assets/language-usage.svg", "w", encoding="utf-8") as f: f.write("\n".join(language_svg) + "\n")
+          compact_top = langs.most_common(8)
+          compact = ['<svg xmlns="http://www.w3.org/2000/svg" width="400" height="220" viewBox="0 0 400 220" role="img" aria-label="Most used languages by code size">', '<rect width="400" height="220" rx="6" fill="#0d1117"/>', '<text x="24" y="33" fill="#00c853" font-family="Arial,sans-serif" font-size="18" font-weight="bold">Most Used Languages</text>']
+          palette = ["#f1e05a", "#563d7c", "#a91e50", "#e34c26", "#3178c6", "#3572a5", "#00c853", "#58a6ff"]
+          if total:
+              left = 24.0
+              for i, (name, size) in enumerate(compact_top):
+                  width = 352 * size / total
+                  compact.append(f'<rect x="{left:.2f}" y="52" width="{width:.2f}" height="8" fill="{palette[i]}"/>')
+                  left += width
+              for i, (name, size) in enumerate(compact_top):
+                  x, y = 24 + (i % 2) * 185, 89 + (i // 2) * 27
+                  compact.append(f'<circle cx="{x+4}" cy="{y-4}" r="4" fill="{palette[i]}"/><text x="{x+14}" y="{y}" fill="#c9d1d9" font-family="Arial,sans-serif" font-size="12">{esc(name)} {size / total * 100:.1f}%</text>')
+          else:
+              compact.append('<text x="24" y="90" fill="#c9d1d9" font-family="Arial,sans-serif" font-size="13">No public language data yet</text>')
+          compact.append(f'<text x="24" y="205" fill="#8b949e" font-family="Arial,sans-serif" font-size="10">Public non-fork repositories · updated {updated}</text>')
+          compact.append('</svg>')
+          with open("assets/language-breakdown.svg", "w", encoding="utf-8") as f: f.write("\n".join(compact) + "\n")
           PY
       - name: Commit updated card
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/github-stats.svg assets/contribution-activity.svg assets/language-usage.svg
+          git add assets/github-stats.svg assets/contribution-activity.svg assets/language-usage.svg assets/language-breakdown.svg
           if ! git diff --cached --quiet; then
             git commit -m "Update profile statistics"
             git push
