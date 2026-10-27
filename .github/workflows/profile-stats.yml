@@ -1,4 +1,5 @@
 name: Update profile statistics
+# Refresh public profile charts automatically.
 on:
   schedule:
     - cron: '17 */6 * * *'
