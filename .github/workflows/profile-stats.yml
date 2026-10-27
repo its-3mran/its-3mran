@@ -30,7 +30,7 @@ jobs:
               followers { totalCount }
               repositories(first:100, after:$cursor, ownerAffiliations:OWNER, privacy:PUBLIC, isFork:false) {
                 totalCount pageInfo { hasNextPage endCursor }
-                nodes { stargazerCount forkCount languages(first:100, orderBy:{field:SIZE,direction:DESC}) { edges { size node { name } } } }
+                nodes { stargazerCount forkCount primaryLanguage { name } languages(first:100, orderBy:{field:SIZE,direction:DESC}) { edges { size node { name } } } }
               }
               contributionsCollection {
                 contributionCalendar { totalContributions weeks { contributionDays { contributionCount } } }
@@ -40,6 +40,7 @@ jobs:
           }"""
           token = os.environ["GH_TOKEN"]
           cursor, first, stars, forks, langs = None, None, 0, 0, Counter()
+          repo_langs = Counter()
           while True:
               payload = json.dumps({"query": query, "variables": {"login": "its-3mran", "cursor": cursor}}).encode()
               req = urllib.request.Request("https://api.github.com/graphql", data=payload, headers={"Authorization": "Bearer " + token, "Content-Type": "application/json", "User-Agent": "profile-stats"})
@@ -51,6 +52,7 @@ jobs:
               if first is None: first = user
               repos = user["repositories"]
               for repo in repos["nodes"]:
+                  if repo["primaryLanguage"]: repo_langs[repo["primaryLanguage"]["name"]] += 1
                   stars += repo["stargazerCount"]
                   forks += repo["forkCount"]
                   for edge in repo["languages"]["edges"]: langs[edge["node"]["name"]] += edge["size"]
@@ -130,12 +132,23 @@ jobs:
           compact.append(f'<text x="24" y="205" fill="#8b949e" font-family="Arial,sans-serif" font-size="10">Public non-fork repositories · updated {updated}</text>')
           compact.append('</svg>')
           with open("assets/language-breakdown.svg", "w", encoding="utf-8") as f: f.write("\n".join(compact) + "\n")
+          ranked = repo_langs.most_common(6)
+          repo_card = ['<svg xmlns="http://www.w3.org/2000/svg" width="400" height="220" viewBox="0 0 400 220" role="img" aria-label="Repositories by primary language">', '<rect width="400" height="220" rx="6" fill="#0d1117"/>', '<text x="24" y="33" fill="#00c853" font-family="Arial,sans-serif" font-size="18" font-weight="bold">Repositories per Language</text>']
+          if ranked:
+              maximum = ranked[0][1]
+              for i, (name, count) in enumerate(ranked):
+                  y = 57 + i * 23
+                  repo_card += [f'<text x="24" y="{y+10}" fill="#c9d1d9" font-family="Arial,sans-serif" font-size="12">{esc(name)}</text>', f'<rect x="140" y="{y}" width="190" height="10" rx="5" fill="#21262d"/>', f'<rect x="140" y="{y}" width="{190 * count / maximum:.1f}" height="10" rx="5" fill="{palette[i]}"/>', f'<text x="343" y="{y+10}" fill="#c9d1d9" font-family="Arial,sans-serif" font-size="12">{count}</text>']
+          else:
+              repo_card.append('<text x="24" y="85" fill="#c9d1d9" font-family="Arial,sans-serif" font-size="12">No public repository languages yet</text>')
+          repo_card += [f'<text x="24" y="208" fill="#8b949e" font-family="Arial,sans-serif" font-size="10">Primary language · updated {updated}</text>', '</svg>']
+          with open("assets/repository-languages.svg", "w", encoding="utf-8") as f: f.write("\n".join(repo_card) + "\n")
           PY
       - name: Commit updated card
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/github-stats.svg assets/contribution-activity.svg assets/language-usage.svg assets/language-breakdown.svg
+          git add assets/github-stats.svg assets/contribution-activity.svg assets/language-usage.svg assets/language-breakdown.svg assets/repository-languages.svg
           if ! git diff --cached --quiet; then
             git commit -m "Update profile statistics"
             git push
