@@ -1,0 +1,97 @@
+name: Update profile statistics
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/profile-stats.yml'
+permissions:
+  contents: write
+concurrency:
+  group: profile-stats
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate public GitHub statistics
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import datetime, html, json, os, urllib.request
+          from collections import Counter
+
+          query = """query($login:String!, $cursor:String) {
+            user(login:$login) {
+              followers { totalCount }
+              repositories(first:100, after:$cursor, ownerAffiliations:OWNER, privacy:PUBLIC, isFork:false) {
+                totalCount pageInfo { hasNextPage endCursor }
+                nodes { stargazerCount forkCount languages(first:100, orderBy:{field:SIZE,direction:DESC}) { edges { size node { name } } } }
+              }
+              contributionsCollection {
+                contributionCalendar { totalContributions weeks { contributionDays { contributionCount } } }
+                totalCommitContributions totalPullRequestContributions totalIssueContributions totalPullRequestReviewContributions
+              }
+            }
+          }"""
+          token = os.environ["GH_TOKEN"]
+          cursor, first, stars, forks, langs = None, None, 0, 0, Counter()
+          while True:
+              payload = json.dumps({"query": query, "variables": {"login": "its-3mran", "cursor": cursor}}).encode()
+              req = urllib.request.Request("https://api.github.com/graphql", data=payload, headers={"Authorization": "Bearer " + token, "Content-Type": "application/json", "User-Agent": "profile-stats"})
+              with urllib.request.urlopen(req) as response:
+                  result = json.load(response)
+              if result.get("errors"): raise RuntimeError(result["errors"])
+              user = result["data"]["user"]
+              if user is None: raise RuntimeError("GitHub user not found")
+              if first is None: first = user
+              repos = user["repositories"]
+              for repo in repos["nodes"]:
+                  stars += repo["stargazerCount"]
+                  forks += repo["forkCount"]
+                  for edge in repo["languages"]["edges"]: langs[edge["node"]["name"]] += edge["size"]
+              if not repos["pageInfo"]["hasNextPage"]: break
+              cursor = repos["pageInfo"]["endCursor"]
+
+          c = first["contributionsCollection"]
+          values = [
+              ("Public repositories", first["repositories"]["totalCount"]),
+              ("Repository stars", stars), ("Repository forks", forks),
+              ("Followers", first["followers"]["totalCount"]),
+              ("Contributions this year", c["contributionCalendar"]["totalContributions"]),
+              ("Commits this year", c["totalCommitContributions"]),
+              ("Pull requests this year", c["totalPullRequestContributions"]),
+              ("Issues this year", c["totalIssueContributions"]),
+              ("Reviews this year", c["totalPullRequestReviewContributions"]),
+          ]
+          updated = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+          def esc(value): return html.escape(str(value))
+          lines = ['<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480" role="img" aria-label="GitHub statistics">', '<rect width="800" height="480" rx="18" fill="#0d1117"/>', '<style>text{font-family:Arial,sans-serif}.title{font-size:24px;fill:#00c853;font-weight:700}.label{font-size:15px;fill:#c9d1d9}.value{font-size:23px;fill:#fff;font-weight:700}.foot{font-size:12px;fill:#8b949e}</style>', '<text x="28" y="40" class="title">GitHub Overview</text>']
+          for i, (label, value) in enumerate(values):
+              x, y = 28 + (i % 3) * 250, 80 + (i // 3) * 72
+              lines += [f'<text x="{x}" y="{y}" class="label">{esc(label)}</text>', f'<text x="{x}" y="{y+27}" class="value">{value:,}</text>']
+          lines.append('<text x="28" y="315" class="title">Languages in public repositories</text>')
+          top = langs.most_common(6)
+          total = sum(langs.values())
+          if total:
+              for i, (name, size) in enumerate(top):
+                  x, y = 28 + (i % 3) * 250, 350 + (i // 3) * 40
+                  lines.append(f'<text x="{x}" y="{y}" class="label">{esc(name)} · {size / total * 100:.1f}%</text>')
+          else:
+              lines.append('<text x="28" y="350" class="label">No language data yet</text>')
+          lines += [f'<text x="28" y="450" class="foot">Updated {updated} · public data · language percentages by code size</text>', '</svg>']
+          os.makedirs("assets", exist_ok=True)
+          with open("assets/github-stats.svg", "w", encoding="utf-8") as f: f.write("\n".join(lines) + "\n")
+          PY
+      - name: Commit updated card
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/github-stats.svg
+          if ! git diff --cached --quiet; then
+            git commit -m "Update profile statistics"
+            git push
+          fi
