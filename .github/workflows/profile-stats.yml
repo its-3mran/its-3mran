@@ -100,7 +100,7 @@ jobs:
               graph.append(f'<polyline points="{coords}" fill="none" stroke="#00c853" stroke-width="3" stroke-linejoin="round"/>')
               for x,y in points: graph.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="2.5" fill="#fff"/>')
           graph += [f'<text x="50" y="255" fill="#8b949e" font-family="Arial,sans-serif" font-size="12">Last {len(days)} days · {sum(d["contributionCount"] for d in days)} contributions</text>', f'<text x="750" y="255" text-anchor="end" fill="#8b949e" font-family="Arial,sans-serif" font-size="12">Updated {updated}</text>', '</svg>']
-          with open("assets/contribution-activity.svg", "w", encoding="utf-8") as f: f.write("\\n".join(graph) + "\\n")
+          with open("assets/contribution-activity.svg", "w", encoding="utf-8") as f: f.write("\n".join(graph) + "\n")
           PY
       - name: Commit updated card
         run: |
