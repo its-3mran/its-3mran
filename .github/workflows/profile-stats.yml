@@ -101,12 +101,23 @@ jobs:
               for x,y in points: graph.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="2.5" fill="#fff"/>')
           graph += [f'<text x="50" y="255" fill="#8b949e" font-family="Arial,sans-serif" font-size="12">Last {len(days)} days · {sum(d["contributionCount"] for d in days)} contributions</text>', f'<text x="750" y="255" text-anchor="end" fill="#8b949e" font-family="Arial,sans-serif" font-size="12">Updated {updated}</text>', '</svg>']
           with open("assets/contribution-activity.svg", "w", encoding="utf-8") as f: f.write("\n".join(graph) + "\n")
+          language_svg = ['<svg xmlns="http://www.w3.org/2000/svg" width="800" height="360" viewBox="0 0 800 360" role="img" aria-label="Programming language usage">', '<rect width="800" height="360" rx="18" fill="#0d1117"/>', '<text x="28" y="40" fill="#00c853" font-family="Arial,sans-serif" font-size="22" font-weight="bold">Language Usage · Public Repositories</text>']
+          colors = ["#00c853", "#58a6ff", "#bc8cff", "#f2cc60", "#ff7b72", "#79c0ff"]
+          if total:
+              for i, (name, size) in enumerate(top):
+                  y = 78 + i * 42
+                  width = size / total * 480
+                  language_svg += [f'<text x="28" y="{y+13}" fill="#c9d1d9" font-family="Arial,sans-serif" font-size="14">{esc(name)}</text>', f'<rect x="180" y="{y}" width="480" height="16" rx="8" fill="#21262d"/>', f'<rect x="180" y="{y}" width="{width:.1f}" height="16" rx="8" fill="{colors[i]}"/>', f'<text x="680" y="{y+13}" fill="#fff" font-family="Arial,sans-serif" font-size="14">{size / total * 100:.1f}%</text>']
+          else:
+              language_svg.append('<text x="28" y="85" fill="#c9d1d9" font-family="Arial,sans-serif" font-size="14">No language data yet</text>')
+          language_svg += [f'<text x="28" y="340" fill="#8b949e" font-family="Arial,sans-serif" font-size="12">By code size · public, non-fork repositories · updated {updated}</text>', '</svg>']
+          with open("assets/language-usage.svg", "w", encoding="utf-8") as f: f.write("\n".join(language_svg) + "\n")
           PY
       - name: Commit updated card
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/github-stats.svg assets/contribution-activity.svg
+          git add assets/github-stats.svg assets/contribution-activity.svg assets/language-usage.svg
           if ! git diff --cached --quiet; then
             git commit -m "Update profile statistics"
             git push
